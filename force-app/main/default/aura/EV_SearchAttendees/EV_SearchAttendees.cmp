@@ -1,0 +1,14 @@
+<aura:component >
+    <aura:attribute name="attendees" type="Object"/>
+    <aura:attribute name="attendee" type="String"/>
+
+    <aura:registerEvent name="refreshAttendees" type="c:EV_AttendeeRefresh"/>
+
+	<lightning:input
+        type="search"
+        placeholder="Search for Attendee..."
+        onchange="{!c.handleChange}"
+        value="{!v.attendee}"
+    />
+
+</aura:component>

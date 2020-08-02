@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingGuestRules>
+        <fullName>Events_External_Access</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Events External Access</label>
+        <sharedTo>
+            <guestUser>Events</guestUser>
+        </sharedTo>
+        <criteriaItems>
+            <field>Publish__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+    </sharingGuestRules>
+</SharingRules>

@@ -1,0 +1,16 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" controller="EV_TicketsController" >
+    <aura:attribute name="tickets" type="Object"/>    
+    <aura:attribute name="ticketMap" type="Map" default="{}"/>
+    <aura:attribute name="attendeeRTypeId" type="String"/>
+    <aura:attribute name="showError" type="Boolean"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:handler name="counterEvent" event="c:EV_NumberOfTickets" action="{!c.registerTicketCounter}"/>
+
+    <c:EV_ChooseTickets tickets="{!v.tickets}" 
+                        ticketMap="{!v.ticketMap}" 
+                        attendeeRTypeId="{!v.attendeeRTypeId}" 
+                        eventId="{!v.recordId}"
+                        showError="{!v.showError}"/>
+</aura:component>

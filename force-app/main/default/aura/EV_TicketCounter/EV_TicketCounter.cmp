@@ -1,0 +1,27 @@
+<aura:component >
+    <aura:attribute name="ticket" type="Object"/>
+    <aura:attribute name="ticketCount" type="Integer"/>
+    <aura:attribute name="incrementDisabled" type="Boolean"/>
+    <aura:attribute name="decrementDisabled" type="Boolean"/>
+    <aura:attribute name="ticketsRemaining" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:registerEvent name="counterEvent" type="c:EV_NumberOfTickets"/>
+    
+    <lightning:layout verticalAlign="end" class="slds-form">
+        <lightning:layoutitem padding="around-small"  size="4" class="slds-align_absolute-center">
+            <aura:text value="{!v.ticket.Name + ' : '}"/><br></br>
+            <aura:text value="{!v.ticketsRemaining}"/>
+        </lightning:layoutitem>
+        <lightning:layoutitem padding="around-small"  size="2" class="right-align">            
+          <lightning:button iconName="utility:dash"  disabled="{!v.decrementDisabled}" onclick="{!c.onDecrement}"/>
+        </lightning:layoutitem>
+        <lightning:layoutitem flexibility="no-grow" padding="around-small" size="3">            
+          <lightning:input type="number" aura:id="noOfTickets" value="{!v.ticketCount}" placeholder="0"  onchange="{!c.onManualUpdate}" />
+        </lightning:layoutitem>
+        <lightning:layoutitem padding="around-small"  size="3" class="left-align">            
+          <lightning:button iconName="utility:add" disabled="{!v.incrementDisabled}" onclick="{!c.onIncrement}"/>
+        </lightning:layoutitem>
+    </lightning:layout>
+
+</aura:component>

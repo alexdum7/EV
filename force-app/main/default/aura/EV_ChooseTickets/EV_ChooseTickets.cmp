@@ -1,0 +1,41 @@
+<aura:component>
+    <aura:attribute name="eventId" type="String"/>
+    <aura:attribute name="tickets" type="Object"/>
+    <aura:attribute name="showError" type="Boolean"/>
+    <aura:attribute name="errorMessage" type="String"/>
+    <aura:attribute name="ticketMap" type="Map" default="{}"/>
+    <aura:attribute name="attendeeRTypeId" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+        <div class="slds-modal__container">
+          <header class="slds-modal__header">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.closeModal}">
+                <lightning:icon iconName="utility:close" size="xx-small" />
+              <span class="slds-assistive-text">Close</span>
+            </button>
+            <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Choose your tickets</h2>
+          </header>
+          <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <aura:iteration items="{!v.tickets}" var="t">
+                <c:EV_TicketCounter ticket="{!t}"/>
+            </aura:iteration>
+          </div>
+          <footer class="slds-modal__footer">
+            <lightning:button variant="brand" label="Register" title="Register" onclick="{! c.Save }" />
+            <lightning:button variant="brand-outline" label="Cancel" title="Cancel" onclick="{! c.closeModal }" /><br></br>
+
+                <aura:if isTrue="{!v.showError}">
+                    <div class="slds-notify slds-notify_toast slds-theme_error">
+                        <span class="slds-assistive-text">error</span>
+                        <div class="slds-notify__content">
+                            <p class="slds-align_absolute-center">{!v.errorMessage}</p>                
+                        </div>
+                    </div>
+                </aura:if>
+          </footer>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+
+</aura:component>

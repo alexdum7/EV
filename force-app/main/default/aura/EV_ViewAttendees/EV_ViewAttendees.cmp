@@ -1,0 +1,39 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" controller="EV_ViewAttendeesController">
+    <aura:attribute name="attendees" type="Object"/>
+    <aura:attribute name="allAttendees" type="Object"/>
+    <aura:attribute name="showSection" type="String"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="recordCount" type="Integer"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:handler name="refreshAttendees" event="c:EV_AttendeeRefresh" action="{!c.refreshAttendees}"/>
+
+    <aura:if isTrue="{!v.showSection == 'Attendees'}">
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+            <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <h2>Record Count: {!v.recordCount}</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+                <c:EV_SearchAttendees attendees="{!v.allAttendees}"/>
+                <lightning:datatable
+                    keyField="id"
+                    data="{!v.attendees}"
+                    columns="{!v.columns}"
+                    hideCheckboxColumn="true"
+                    onrowaction="{!c.actionSelect}"
+                />
+            </div>
+            <footer class="slds-modal__footer">
+                <lightning:button variant="brand" label="Register New Attendee" title="NewAttendee" onclick="{! c.newAttendee }" />
+                <lightning:button variant="brand-outline" label="Cancel" title="Cancel" onclick="{! c.closeModal }" /><br></br>
+            </footer>
+            </div>
+        </section>
+    </aura:if>
+
+    <aura:if isTrue="{!v.showSection == 'Tickets'}">
+        <c:EV_TicketContainer recordId="{!v.recordId}"/>
+    </aura:if>
+</aura:component>
